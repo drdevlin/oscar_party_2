@@ -5,6 +5,8 @@ import { Selection } from '@/components/Selection';
 import type { RecordModel } from 'pocketbase';
 import type { Category as CategoryType, Player } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 export interface SelectionsProps {
   params: { playerId: string };
 }
