@@ -1,0 +1,21 @@
+.selection {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+.win {
+  justify-self: start;
+  height: 1.5rem;
+}
+
+.category {
+  font-weight: 700;
+}
+
+.next {
+  justify-self: end;
+  height: 1.5rem;
+  color: var(--border-color);
+}

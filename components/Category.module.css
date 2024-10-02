@@ -1,0 +1,16 @@
+.category {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 1rem;
+}
+
+.nominationButton {
+  border-radius: 4px;
+  font-size: 1.25rem;
+  background: hsl(var(--gold-hsl) / 0.1);
+}
+
+.selected {
+  background: hsl(var(--gold-hsl) / 0.3);
+}

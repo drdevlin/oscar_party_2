@@ -1,0 +1,17 @@
+.player {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.avatar {
+  justify-self: start;
+  filter: sepia(1) contrast(1.2);
+}
+
+.player > svg {
+  justify-self: end;
+  height: 1.5rem;
+  color: var(--border-color);
+}

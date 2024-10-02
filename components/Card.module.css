@@ -1,0 +1,16 @@
+.card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+
+  border: var(--border);
+  border-radius: 16px;
+
+  padding: 1rem;
+
+  background: linear-gradient(170deg, hsl(var(--gold-hsl) / 0.15), hsl(var(--gold-hsl) / 0.08));
+}
+
+.glow {
+  box-shadow: 0px 0px 16px 2px hsl(60deg 67% 47% / 0.3);
+}

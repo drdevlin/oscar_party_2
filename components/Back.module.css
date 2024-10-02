@@ -1,0 +1,17 @@
+.back {
+  display: inline-grid;
+
+  margin-inline-end: 1rem;
+
+  border: var(--border);
+  border-radius: 8px;
+
+  padding: 0.2rem;
+
+  background: linear-gradient(170deg, hsl(var(--gold-hsl) / 0.15), hsl(var(--gold-hsl) / 0.08));
+}
+
+.back > svg {
+  height: 1.5rem;
+  color: var(--border-color);
+}
