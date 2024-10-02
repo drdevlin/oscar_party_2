@@ -19,19 +19,14 @@ export interface CategoryProps {
 }
 export const Category = ({ playerId, categoryId, nominations }: CategoryProps) => {
   const [selection, setSelection] = useState<CategorySelection | undefined>(undefined);
-  const [optimisticSelection, setOptimisticSelection] = useState<CategorySelection | undefined>(undefined);
 
   const fetchSelection = async () => {
-    try {
-      const [selection] = await pb.collection('selections').getFullList({
-        filter: `player="${playerId}" && nomination.category="${categoryId}"`,
-        fields: 'id, nomination',
-        next: { tags: ['selections'] },
-      }) as CategorySelection[];
-      setSelection(selection);
-    } catch(error) {
-      console.error(error);
-    }
+    const [selection] = await pb.collection('selections').getFullList({
+      filter: `player="${playerId}" && nomination.category="${categoryId}"`,
+      fields: 'id, nomination',
+      next: { tags: ['selections'] },
+    }) as CategorySelection[];
+    setSelection(selection);
   };
 
   useEffect(() => {
@@ -40,7 +35,7 @@ export const Category = ({ playerId, categoryId, nominations }: CategoryProps) =
     return () => {
       pb.collection('selections').unsubscribe('*');
     };
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <Card>
