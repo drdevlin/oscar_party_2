@@ -42,7 +42,7 @@ export default async function Selections({ params: { playerId }}: SelectionsProp
 }
 
 export const generateStaticParams = async () => {
-  const players = await pb.collection('players').getFullList() as Player[];
+  const players = await pb.collection('players').getFullList({ cache: 'no-store' }) as Player[];
 
   return players.map(({ id }) => ({ playerId: id }));
 };

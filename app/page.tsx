@@ -19,6 +19,7 @@ export default function Home() {
   const fetchSelection = async () => {
     const allPlayers = await pb.collection('players').getFullList({
       fields: 'id, name, avatar',
+      cache: 'no-store',
     }) as PlayerType[];
     const players = tally(
       parse(
