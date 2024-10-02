@@ -15,27 +15,22 @@ interface PlayerSelection {
 
 export default function Home() {
   const [players, setPlayers] = useState<PlayerType[]>([]);
-  console.log('Home.state.players:', players);
 
   const fetchSelection = async () => {
     const allPlayers = await pb.collection('players').getFullList({
       fields: 'id, name, avatar',
       cache: 'no-store',
     }) as PlayerType[];
-    console.log('fetchSelection.allPlayers:', allPlayers);
     const players = tally(
       parse(
         await pb.collection('selections').getFullList({
           fields: 'expand.player.id, expand.player.name, expand.player.avatar, expand.nomination.win, expand.nomination.expand.category.points',
           expand: 'player, nomination, nomination.category',
           cache: 'no-store',
-          next: { tags: ['selections'] },
         })
       )
     ) as PlayerType[];
-    console.log('fetchSelection.players:', players);
     const otherPlayers = allPlayers.filter((player) => !players.some((talliedPlayer) => talliedPlayer.id === player.id));
-    console.log('fetchSelection.otherPlayers:', otherPlayers);
     setPlayers([...players, ...otherPlayers]);
   };
 

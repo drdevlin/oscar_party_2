@@ -24,7 +24,7 @@ export const Category = ({ playerId, categoryId, nominations }: CategoryProps) =
     const [selection] = await pb.collection('selections').getFullList({
       filter: `player="${playerId}" && nomination.category="${categoryId}"`,
       fields: 'id, nomination',
-      next: { tags: ['selections'] },
+      cache: 'no-store',
     }) as CategorySelection[];
     setSelection(selection);
   };

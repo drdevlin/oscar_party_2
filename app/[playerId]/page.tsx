@@ -14,7 +14,7 @@ export default async function Selections({ params: { playerId }}: SelectionsProp
     await pb.collection('selections').getFullList({
       filter: `player="${playerId}"`,
       expand: 'nomination, nomination.nominee',
-      next: { tags: ['selections'] },
+      cache: 'no-store',
     })
   );
 
