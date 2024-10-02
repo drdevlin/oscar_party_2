@@ -26,6 +26,7 @@ export default function Home() {
         await pb.collection('selections').getFullList({
           fields: 'expand.player.id, expand.player.name, expand.player.avatar, expand.nomination.win, expand.nomination.expand.category.points',
           expand: 'player, nomination, nomination.category',
+          cache: 'no-store',
           next: { tags: ['selections'] },
         })
       )
