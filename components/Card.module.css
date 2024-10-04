@@ -8,7 +8,7 @@
 
   padding: 1rem;
 
-  background: linear-gradient(170deg, hsl(var(--gold-hsl) / 0.15), hsl(var(--gold-hsl) / 0.08));
+  background: linear-gradient(170deg, hsl(var(--gold-hsl) / 0.08), hsl(var(--gold-hsl) / 0.01));
 }
 
 .glow {
