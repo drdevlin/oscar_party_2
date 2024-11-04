@@ -1,0 +1,7 @@
+.plus {
+  margin-inline-start: 0.5rem;
+}
+
+.plus > svg {
+  color: hsl(var(--gold-hsl));
+}

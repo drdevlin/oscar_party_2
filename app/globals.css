@@ -53,8 +53,26 @@ h1 {
   background-clip: text;
 }
 
+input {
+  min-width: none;
+  border: var(--border);
+  border-radius: 4px;
+  padding: 0.25rem;
+  color: inherit;
+  font-family: inherit;
+  font-size: 1.5rem;
+  background: transparent;
+  filter: sepia(1);
+}
+
+::placeholder {
+  opacity: 0.4;
+}
+
 button {
   border: none;
   color: inherit;
+  font-family: inherit;
+  font-size: inherit;
   background: transparent;
 }

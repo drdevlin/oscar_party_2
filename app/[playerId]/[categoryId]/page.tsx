@@ -6,9 +6,10 @@ import type { RecordModel } from 'pocketbase';
 import type { Category as CategoryType } from '@/lib/types';
 
 export interface CategoriesProps {
-  params: { playerId: string, categoryId: string };
+  params: Promise<{ playerId: string, categoryId: string }>;
 }
-export default async function Categories({ params: { playerId, categoryId } }: CategoriesProps) {
+export default async function Categories({ params }: CategoriesProps) {
+  const { playerId, categoryId } = await params;
   const nominations = parse(
     await pb.collection('nominations').getFullList({
       filter: `category="${categoryId}"`,

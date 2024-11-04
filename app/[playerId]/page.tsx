@@ -1,16 +1,20 @@
 import { pb } from '@/lib/pb.server';
+import { getSession } from '@/lib/jwt';
 import { Back } from '@/components/Back';
 import { Selection } from '@/components/Selection';
+import { Auth } from '@/components/Auth';
 
 import type { RecordModel } from 'pocketbase';
 import type { Category as CategoryType, Player } from '@/lib/types';
 
-export const dynamic = 'force-dynamic';
-
 export interface SelectionsProps {
-  params: { playerId: string };
+  params: Promise<{ playerId: string }>;
 }
-export default async function Selections({ params: { playerId }}: SelectionsProps) {
+export default async function Selections({ params }: SelectionsProps) {
+  const { playerId } = await params;
+  const user = await getSession();
+  const locked = user === null || user !== playerId;
+
   const categories = await pb.collection('categories').getFullList() as CategoryType[];
   const selections = parse(
     await pb.collection('selections').getFullList({
@@ -26,6 +30,7 @@ export default async function Selections({ params: { playerId }}: SelectionsProp
       <div>
         <Back href="/" />
         <h1>Selections</h1>
+        <Auth playerId={playerId} differentPlayer={locked && user !== null} locked={locked} />
       </div>
       {categories.map((category) => {
         const selection = selections.find((selection) => selection.categoryId === category.id);
@@ -37,6 +42,7 @@ export default async function Selections({ params: { playerId }}: SelectionsProp
             categoryName={category.name}
             nomineeName={selection?.nomineeName || ''}
             win={Boolean(selection?.win)}
+            locked={locked}
           />
         );
       })}
@@ -45,7 +51,10 @@ export default async function Selections({ params: { playerId }}: SelectionsProp
 }
 
 export const generateStaticParams = async () => {
-  const players = await pb.collection('players').getFullList({ cache: 'no-store' }) as Player[];
+  const players = await pb.collection('players').getFullList({
+    cache: 'no-store',
+    next: { tags: ['players' ]},
+  }) as Player[];
 
   return players.map(({ id }) => ({ playerId: id }));
 };
