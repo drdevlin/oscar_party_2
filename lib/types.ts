@@ -42,3 +42,31 @@ export interface SelectionRecord {
   player: string;
   nomination: string;
 }
+
+export interface Invite {
+  id: string;
+  token: string;
+}
+
+export enum OscarError {
+  AvatarMissing,
+  NameMissing,
+  PinMissing,
+  ConfirmationMissing,
+  PinMismatch,
+}
+
+type RequestNull = [null, null]
+type RequestError = [OscarError, null];
+type RequestSuccess = [null, true];
+export type RequestState = RequestNull | RequestError | RequestSuccess;
+
+export interface SessionTokenClaims {
+  [index: string]: string;
+  plr: string;
+}
+
+export interface InviteTokenClaims {
+  [index: string]: string;
+  cod: string;
+}

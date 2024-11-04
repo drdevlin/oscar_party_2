@@ -2,11 +2,9 @@
 
 import { revalidateTag } from 'next/cache';
 import { pb } from '@/lib/pb.server';
+import { username, password } from '@/lib/db';
 
 import type { SelectionRecord } from '@/lib/types';
-
-const username = process.env.DB_USERNAME!;
-const password = process.env.DB_PASSWORD!;
 
 export const upsertSelection = async (selection: Partial<SelectionRecord>) => {
   await pb.admins.authWithPassword(username, password);
