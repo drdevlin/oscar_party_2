@@ -1,0 +1,11 @@
+.pinInput {
+  display: grid;
+  grid-template-columns: repeat(4, 2.25rem);
+  gap: 1rem;
+}
+
+.pinInput > input {
+  text-align: center;
+}
+
+

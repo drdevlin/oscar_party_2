@@ -1,0 +1,34 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 24.3rem;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.avatarInput {
+  width: 2.25rem;
+  text-align: center;
+  filter: sepia(1) contrast(1.2);
+}
+
+.avatarInput::placeholder {
+  filter: grayscale(1) contrast(1.2);
+}
+
+.nameInput {
+  width: 100%;
+}
+
+.submit {
+  margin-block-start: 1rem;
+  border-radius: 4px;
+  padding: 0.25rem 0;
+  background: hsl(var(--gold-hsl) / 0.1);
+}

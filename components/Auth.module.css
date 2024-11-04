@@ -1,0 +1,7 @@
+.lock {
+  margin-inline-start: 0.8rem;
+}
+
+.lock > svg {
+  color: hsl(var(--gold-hsl));
+}
