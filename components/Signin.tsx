@@ -15,7 +15,7 @@ export interface SigninProps {
 }
 export const Signin = ({ playerId, onClose }: SigninProps) => {
   const signinWithPlayerId = signin.bind(null, playerId);
-  const [[error, success], action] = useActionState(signinWithPlayerId, initialState);
+  const [[, success], action] = useActionState(signinWithPlayerId, initialState);
 
   if (success) {
     if (onClose) onClose();

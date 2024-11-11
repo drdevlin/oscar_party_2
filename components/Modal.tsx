@@ -2,8 +2,6 @@
 
 import styles from './Modal.module.css';
 
-const initialState: [null, null] = [null, null];
-
 export interface ModalProps {
   onClose?: () => void;
   children: React.ReactNode;

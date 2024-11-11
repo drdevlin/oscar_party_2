@@ -12,7 +12,7 @@ export interface SignoutProps {
   onClose?: () => void;
 }
 export const Signout = ({ onClose }: SignoutProps) => {
-  const [[error, success], action] = useActionState(signout, initialState);
+  const [[, success], action] = useActionState(signout, initialState);
 
   if (success) {
     if (onClose) onClose();

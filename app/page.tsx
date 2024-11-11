@@ -69,7 +69,7 @@ export default function Home() {
       const invited = await checkInvitation(invite);
       setInvited(invited);
     })();
-  }, []);
+  }, [invite]);
 
   return (
     <>

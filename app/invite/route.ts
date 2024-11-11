@@ -6,7 +6,7 @@ import { pb } from '@/lib/pb.server';
 const secret = process.env.INVITE_SECRET;
 if (!secret) throw new Error('Invite secret not found.');
  
-export async function GET(request: Request) {
+export async function GET() {
   const headersList = await headers();
   const apikey = headersList.get('apikey');
 
