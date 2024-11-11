@@ -4,8 +4,7 @@ import { cookies } from 'next/headers';
 import { pbkdf2Sync } from 'crypto';
 import { pb } from '@/lib/pb.server';
 import { iterations, length, digest, split } from '@/lib/crypto';
-import { createInviteToken, endSession, extractInviteCode, startSession } from '@/lib/jwt';
-import { username, password } from '@/lib/db';
+import { endSession, extractInviteCode, startSession } from '@/lib/jwt';
 import { OscarError } from '@/lib/types';
 
 import type { Invite, Player, RequestState } from '@/lib/types';
@@ -55,11 +54,4 @@ export const checkInvitation = async (invite: string): Promise<boolean> => {
     console.error(error);
     return false;
   }
-};
-
-export const saveInvitation = async () => {
-  const token = await createInviteToken();
-  await pb.admins.authWithPassword(username, password);
-  const created = await pb.collection('invites').create({ token });
-  console.log(`${created.id}-<code>`);
 };

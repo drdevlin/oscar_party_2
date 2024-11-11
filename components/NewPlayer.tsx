@@ -22,7 +22,7 @@ export const NewPlayer = ({ onClose }: NewPlayerProps) => {
   };
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <form className={styles.form} action={action}>
         <div className={styles.inputGroup}>
           <label>Mood</label>

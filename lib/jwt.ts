@@ -57,19 +57,19 @@ export const createInviteToken = async () => {
   const jwk = await exportJWK(secretKey);
   const code = jwk.k!;
 
-  console.log(code);
-
   const payload: InviteTokenClaims = {
     cod: code,
   };
 
-  return new EncryptJWT(payload)
-    .setProtectedHeader({ alg: 'dir', enc: 'A128CBC-HS256' })
-    .setIssuedAt()
-    .setIssuer(issuer)
-    .setAudience(audience)
-    .setExpirationTime('1 day')
-    .encrypt(secret);
+  const token = await new EncryptJWT(payload)
+  .setProtectedHeader({ alg: 'dir', enc: 'A128CBC-HS256' })
+  .setIssuedAt()
+  .setIssuer(issuer)
+  .setAudience(audience)
+  .setExpirationTime('1 day')
+  .encrypt(secret);
+
+  return [token, code];
 };
 
 export const extractInviteCode = async (token: string) => {
