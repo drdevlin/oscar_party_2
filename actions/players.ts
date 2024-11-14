@@ -12,11 +12,11 @@ import type { Player, RequestState } from '@/lib/types';
 import { cookies } from 'next/headers';
 
 export const createPlayer = async (state: RequestState, formData: FormData): Promise<RequestState> => {
-  const avatar = formData.get('avatar');
-  if (!avatar || avatar instanceof File) return [OscarError.AvatarMissing, null];
+  const avatar = formData.get('avatar') as string;
+  if (!avatar) return [OscarError.AvatarMissing, null];
 
-  const name = formData.get('name');
-  if (!name || name instanceof File) return [OscarError.NameMissing, null];
+  const name = formData.get('name') as string;
+  if (!name) return [OscarError.NameMissing, null];
 
   const pinGiven = [
     formData.get('pin0') || '',
