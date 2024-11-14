@@ -16,5 +16,5 @@ export async function GET() {
   await pb.admins.authWithPassword(username, password);
   const created = await pb.collection('invites').create({ token });
  
-  return new Response(`${created.id}-${code}`, { status: 200 });
+  return new Response(`${created.id}%3a%3a${code}`, { status: 200 });
 };

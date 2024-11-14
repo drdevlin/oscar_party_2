@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { pb } from '@/lib/pb.client';
 import { checkInvitation } from '@/actions/auth';
@@ -13,9 +13,6 @@ import type { Player as PlayerType } from '@/lib/types';
 import styles from './page.module.css';
 
 export default function Home() {
-  const invite = useSearchParams().get('i');
-
-  const [invited, setInvited] = useState(false);
   const [players, setPlayers] = useState<PlayerType[]>([]);
   const [isNewOpen, setIsNewOpen] = useState(false);
 
@@ -63,6 +60,27 @@ export default function Home() {
     };
   }, []);
 
+  return (
+    <>
+      <div>
+        <h1>Players</h1>
+        <Suspense>
+          <AddNewPlayer onClick={handlePlusClick} />
+        </Suspense>
+      </div>
+      {players.map((player) => <Player key={player.id} player={player} />)}
+      {isNewOpen && <NewPlayer onClose={handleNewPlayerCloseClick} />}
+    </>
+  );
+}
+
+interface AddNewPlayerProps {
+  onClick: () => void;
+}
+const AddNewPlayer = ({ onClick }: AddNewPlayerProps) => {
+  const invite = useSearchParams().get('i');
+  const [invited, setInvited] = useState(false);
+
   useEffect(() => {
     (async () => {
       if (!invite) return;
@@ -71,21 +89,13 @@ export default function Home() {
     })();
   }, [invite]);
 
+  if (!invited) return null;
   return (
-    <>
-      <div>
-        <h1>Players</h1>
-        {invited && (
-          <button className={styles.plus} onClick={handlePlusClick}>
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
-          </button>
-        )}
-      </div>
-      {players.map((player) => <Player key={player.id} player={player} />)}
-      {isNewOpen && <NewPlayer onClose={handleNewPlayerCloseClick} />}
-    </>
+    <button className={styles.plus} onClick={onClick}>
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
+    </button>
   );
-}
+};
 
 interface PlayerSelection {
   player: PlayerType;

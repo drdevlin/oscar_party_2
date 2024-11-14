@@ -39,7 +39,7 @@ export const signout = async (): Promise<RequestState> => {
 
 export const checkInvitation = async (invite: string): Promise<boolean> => {
   try {
-    const [id, code] = invite.split('-');
+    const [id, code] = invite.split('::');
     if (!id) return false;
     if (!code) return false;
 
