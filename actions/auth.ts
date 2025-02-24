@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { pbkdf2Sync } from 'crypto';
 import { pb } from '@/lib/pb.server';
 import { iterations, length, digest, split } from '@/lib/crypto';
-import { endSession, extractInviteCode, startSession } from '@/lib/jwt';
+import { endSession, extractInviteCode, getSession, startSession } from '@/lib/jwt';
 import { OscarError } from '@/lib/types';
 
 import type { Invite, Player, RequestState } from '@/lib/types';
@@ -54,4 +54,8 @@ export const checkInvitation = async (invite: string): Promise<boolean> => {
     console.error(error);
     return false;
   }
+};
+
+export const fetchSession = async () => {
+  return getSession();
 };
