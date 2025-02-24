@@ -35,7 +35,7 @@ export const HideSelections = ({ playerId }: HideSelectionsProps) => {
     return () => {
       pb.collection('players').unsubscribe('*');
     };
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <>
