@@ -43,6 +43,7 @@ export const createPlayer = async (state: RequestState, formData: FormData): Pro
     avatar,
     name,
     pin,
+    hideSelections: true,
   };
 
   await pb.admins.authWithPassword(username, password);
@@ -55,4 +56,9 @@ export const createPlayer = async (state: RequestState, formData: FormData): Pro
   return [null, true];
 };
 
-
+export const updatePlayer = async (id: string , update: Partial<Player>) => {
+  if (!id) return;
+  await pb.admins.authWithPassword(username, password);
+  await pb.collection('players').update(id, update);
+  revalidateTag('players');
+};
