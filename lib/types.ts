@@ -8,6 +8,7 @@ export interface Player {
   name: string;
   avatar: string;
   pin?: string;
+  hideSelections?: boolean;
 }
 
 export interface Category {
