@@ -1,0 +1,7 @@
+.eye {
+  margin-inline-start: 2rem;
+}
+
+.eye > svg {
+  color: hsl(var(--gold-hsl));
+}
