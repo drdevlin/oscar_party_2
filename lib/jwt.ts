@@ -66,7 +66,7 @@ export const createInviteToken = async () => {
   .setIssuedAt()
   .setIssuer(issuer)
   .setAudience(audience)
-  .setExpirationTime('1 day')
+  .setExpirationTime('3 days')
   .encrypt(secret);
 
   return [token, code];
