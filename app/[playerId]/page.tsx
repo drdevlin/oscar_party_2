@@ -18,7 +18,7 @@ export default async function Selections({ params }: SelectionsProps) {
 
   const user = await getSession();
   const selectionsBelongToUser = user === playerId;
-  const locked = user === null || !selectionsBelongToUser;
+  const locked = true; // TODO: user === null || !selectionsBelongToUser;
 
   const { hideSelections } = await pb.collection('players').getOne(playerId, {
     fields: 'hideSelections',
