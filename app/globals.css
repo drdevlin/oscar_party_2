@@ -28,8 +28,8 @@ main {
   grid-auto-rows: max-content;
   gap: 1rem;
 
-  width: 100svw;
-  height: 100svh;
+  width: 100lvw;
+  height: 100lvh;
   max-width: 800px;
 
   padding: 1rem;
