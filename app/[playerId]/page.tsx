@@ -18,7 +18,7 @@ export default async function Selections({ params }: SelectionsProps) {
 
   const user = await getSession();
   const selectionsBelongToUser = user === playerId;
-  const locked = true; // TODO: user === null || !selectionsBelongToUser;
+  const locked = user === null || !selectionsBelongToUser;
 
   const { hideSelections } = await pb.collection('players').getOne(playerId, {
     fields: 'hideSelections',
@@ -27,7 +27,9 @@ export default async function Selections({ params }: SelectionsProps) {
 
   const hidden = hideSelections && !selectionsBelongToUser;
 
-  const categories = await pb.collection('categories').getFullList() as CategoryType[];
+  const categories = await pb.collection('categories').getFullList({
+    filter: `year="2026"`,
+  }) as CategoryType[];
   const selections = parse(
     await pb.collection('selections').getFullList({
       filter: `player="${playerId}"`,

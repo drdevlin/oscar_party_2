@@ -30,7 +30,9 @@ export default async function Categories({ params }: CategoriesProps) {
 }
 
 export const generateStaticParams = async () => {
-  const categories = await pb.collection('categories').getFullList() as CategoryType[];
+  const categories = await pb.collection('categories').getFullList({
+    filter: `year="2026"`,
+  }) as CategoryType[];
 
   return categories.map(({ id }) => ({ categoryId: id }));
 };
