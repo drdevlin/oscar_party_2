@@ -19,20 +19,20 @@ export const signin = async (playerId: string, state: RequestState, formData: Fo
   if (pinGiven.length < 4) return [OscarError.PinMissing, null];
 
   const player = await pb.collection('players').getOne(playerId) as Player;
-  const [salt, storedHash] = player.pin?.split(split) || []; 
+  const [salt, storedHash] = player.pin?.split(split) || [];
 
   const hash = pbkdf2Sync(pinGiven, salt, iterations, length, digest).toString(`hex`);
   if (storedHash !== hash) return [OscarError.PinMismatch, null];
-  
+
   const cookieStore = await cookies();
-  startSession(playerId, cookieStore);
+  await startSession(playerId, cookieStore);
 
   return [null, true];
 };
 
 export const signout = async (): Promise<RequestState> => {
   const cookieStore = await cookies();
-  endSession(cookieStore);
+  await endSession(cookieStore);
 
   return [null, true];
 };

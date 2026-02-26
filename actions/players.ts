@@ -48,9 +48,9 @@ export const createPlayer = async (state: RequestState, formData: FormData): Pro
 
   await pb.admins.authWithPassword(username, password);
   const created = await pb.collection('players').create(player);
-  
+
   const cookieStore = await cookies();
-  startSession(created.id, cookieStore);
+  await startSession(created.id, cookieStore);
 
   revalidateTag('players');
   return [null, true];
