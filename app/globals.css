@@ -2,7 +2,6 @@
   --gold-hsl: 45deg 67% 47%;
   --border-color: hsl(var(--gold-hsl) / 0.2);
   --border: 1px solid var(--border-color);
-  --vdiff: calc(100lvh - 100dvh);
 }
 
 html,
@@ -32,7 +31,7 @@ main {
   height: 100%;
   max-width: 800px;
 
-  padding: max(1rem, var(--vdiff)) 1rem;
+  padding: max(1rem, calc(100lvh - 100svh)) 1rem;
 
   overflow-y: scroll;
 }
