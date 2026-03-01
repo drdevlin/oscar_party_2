@@ -12,6 +12,7 @@ body {
 }
 
 body {
+  position: relative;
   display: grid;
   place-items: center;
   color: hsl(45deg 50% 90%);
@@ -31,7 +32,7 @@ main {
   height: 100%;
   max-width: 800px;
 
-  padding: max(1rem, calc(100lvh - 100svh)) 1rem;
+  padding: 8rem 1rem;
 
   overflow-y: scroll;
 }
