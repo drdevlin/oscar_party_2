@@ -10,6 +10,11 @@
   filter: sepia(1) contrast(1.2);
 }
 
+.name {
+  display: flex;
+  gap: 1rem;
+}
+
 .player > svg {
   justify-self: end;
   height: 1.5rem;

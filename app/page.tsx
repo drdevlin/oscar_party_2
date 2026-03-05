@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { tally } from '@/utils/tally';
 import { pb } from '@/lib/pb.client';
 import { checkInvitation } from '@/actions/auth';
 import { Player } from '@/components/Player';
@@ -33,6 +34,7 @@ export default function Home() {
     const players = tally(
       parse(
         await pb.collection('selections').getFullList({
+          filter: 'nomination.category.year="2026"',
           fields: 'expand.player.id, expand.player.name, expand.player.avatar, expand.nomination.win, expand.nomination.expand.category.points',
           expand: 'player, nomination, nomination.category',
           cache: 'no-store',
@@ -40,6 +42,7 @@ export default function Home() {
         })
       )
     ) as PlayerType[];
+
     const otherPlayers = allPlayers.filter((player) => !players.some((talliedPlayer) => talliedPlayer.id === player.id));
     setPlayers([...players, ...otherPlayers]);
   };
@@ -113,22 +116,4 @@ const parse = (records: RecordModel[]): PlayerSelection[] => {
     win: record.expand?.nomination.win,
     points: record.expand?.nomination.expand?.category.points,
   }));
-};
-
-const tally = (selections: PlayerSelection[]) => {
-  const tallied = selections.reduce<Map<string, number>>((acc, curr) => {
-    let prev = 0;
-    if (acc.has(curr.player.id)) {
-      prev = acc.get(curr.player.id)!
-    }
-    const addition = curr.win ? curr.points : 0;
-    acc.set(curr.player.id, prev + addition);
-    return acc;
-  }, new Map());
-  const entries = Array.from(tallied.entries());
-  entries.sort(([, a], [, b]) => b - a);
-  return entries.map(([playerId]) => {
-    const selection = selections.find((selection) => selection.player.id === playerId)!;
-    return selection.player;
-  });
 };
