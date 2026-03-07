@@ -41,12 +41,12 @@ export default async function Selections({ params }: SelectionsProps) {
 
   return (
     <>
-      <div>
+      <nav>
         <Back href="/" />
         <h1>Selections</h1>
         <Auth playerId={playerId} differentPlayer={locked && user !== null} locked={locked} />
         {selectionsBelongToUser && <HideSelections playerId={playerId} />}
-      </div>
+      </nav>
       {hidden ? (
         <p>Player has hidden their selections.</p>
       ) : (

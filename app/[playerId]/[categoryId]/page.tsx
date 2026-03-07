@@ -5,6 +5,8 @@ import { Category } from '@/components/Category';
 import type { RecordModel } from 'pocketbase';
 import type { Category as CategoryType } from '@/lib/types';
 
+import styles from './page.module.css';
+
 export interface CategoriesProps {
   params: Promise<{ playerId: string, categoryId: string }>;
 }
@@ -20,10 +22,10 @@ export default async function Categories({ params }: CategoriesProps) {
 
   return (
     <>
-      <div>
+      <nav className={styles.nav}>
         <Back href={`/${playerId}`} />
         <h1>{categoryName}</h1>
-      </div>
+      </nav>
       <Category playerId={playerId} categoryId={categoryId} nominations={nominations} />
     </>
   );

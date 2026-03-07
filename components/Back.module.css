@@ -1,4 +1,5 @@
 .back {
+  flex: none;
   display: inline-grid;
 
   margin-inline-end: 1rem;

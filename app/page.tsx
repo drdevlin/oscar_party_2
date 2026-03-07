@@ -65,12 +65,12 @@ export default function Home() {
 
   return (
     <>
-      <div>
+      <nav>
         <h1>Players</h1>
         <Suspense>
           <AddNewPlayer onClick={handlePlusClick} />
         </Suspense>
-      </div>
+      </nav>
       {players.map((player) => <Player key={player.id} player={player} />)}
       {isNewOpen && <NewPlayer onClose={handleNewPlayerCloseClick} />}
     </>
